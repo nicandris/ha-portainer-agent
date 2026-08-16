@@ -1,0 +1,17 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# Runs the Portainer agent, passing any add-on options through as environment.
+set -e
+
+if bashio::config.has_value 'env_vars'; then
+    for index in $(bashio::config 'env_vars|keys'); do
+        name=$(bashio::config "env_vars[${index}].name")
+        value=$(bashio::config "env_vars[${index}].value")
+        bashio::log.info "Exporting ${name}"
+        export "${name}=${value}"
+    done
+fi
+
+bashio::log.info "Starting Portainer agent on port 9001..."
+cd /app
+exec ./agent

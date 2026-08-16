@@ -1,31 +1,42 @@
 # HA Add-ons (nicandris)
 
-> **Cherry-picked from upstream.** The `portainer_agent` add-on in this repo is a copy of
-> [alexbelgium/hassio-addons](https://github.com/alexbelgium/hassio-addons/tree/master/portainer_agent),
-> taken as a single-commit snapshot with no upstream git history. Only that one add-on was copied —
-> nothing else from that repo.
+Private Home Assistant add-on repository.
 
-## Add-ons
-
-| Add-on | Description |
-|---|---|
-| [Portainer Agent](portainer_agent) | Exposes this Home Assistant host's Docker to a remote Portainer instance. |
+| Add-on | Version | Description |
+|---|---|---|
+| [Portainer Agent](portainer_agent) | 2.44.0 | Exposes this host's Docker to a remote Portainer instance. |
 
 ## Install
 
-Home Assistant → Settings → Add-ons → Add-on Store → ⋮ → Repositories → add:
+This repository is **private**. Add it with a GitHub token embedded in the URL:
+
+Settings → Add-ons → Add-on Store → ⋮ → Repositories → add:
 
 ```
-https://github.com/nicandris/ha-portainer-agent
+https://<TOKEN>@github.com/nicandris/ha-portainer-agent
 ```
 
-Then install **Portainer Agent** and point Portainer at `<ha-host>:9001`.
+Use a fine-grained personal access token scoped to this repository with **Contents: read-only**.
+The Supervisor passes the URL straight to `git clone`, so the credentials just work.
 
-> **Note:** this repo is private. The Supervisor clones add-on repositories anonymously, so it
-> cannot read a private repo — make it public, or install the add-on by copying the folder into
-> `/addons` on the HA host as a local add-on.
+Then install **Portainer Agent** — it builds on the host — and point Portainer at
+`<ha-host>:9001`.
 
-## Upstream
+> **The token is stored in plaintext** in the Supervisor's store config and is visible in the
+> repository list in the UI. Scope it to read-only on this one repo, and rotate it if the HA
+> config is ever shared or backed up somewhere untrusted.
 
-The add-on pulls the prebuilt image `ghcr.io/alexbelgium/portainer_agent-{arch}`; it does not build
-the agent from source. To pick up upstream fixes, re-copy the folder from alexbelgium's repo.
+Alternatively, skip the token and install it as a local add-on:
+
+```bash
+# on the Home Assistant host
+git clone https://github.com/nicandris/ha-portainer-agent /addons/ha-portainer-agent
+```
+
+## Origin
+
+The `portainer_agent` add-on started as a copy of
+[alexbelgium/hassio-addons](https://github.com/alexbelgium/hassio-addons/tree/master/portainer_agent)
+and has since been rewritten: it now builds from the official `portainer/agent` image on the
+current Home Assistant base, with no dependency on that repository's build machinery or prebuilt
+images. See `portainer_agent/CHANGELOG.md`.
