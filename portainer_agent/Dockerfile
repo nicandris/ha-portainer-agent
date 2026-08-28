@@ -1,7 +1,7 @@
 ARG BUILD_FROM
 
 # Portainer publishes the agent as a static binary plus its static assets in /app.
-FROM portainer/agent:2.44.0 AS agent
+FROM portainer/agent:2.45.0 AS agent
 
 FROM ${BUILD_FROM}
 

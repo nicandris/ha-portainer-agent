@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.45.0
+
+- Portainer agent `2.44.0` → `2.45.0`, matching the Portainer server on nkhome.
+
 ## 2.44.0
 
 Rewritten as a self-contained add-on. Versioning now tracks the Portainer agent release.
