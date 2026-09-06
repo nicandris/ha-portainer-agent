@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.45.0.1
+
+- Home Assistant base image `21.0.1` → `21.0.4`: bashio `0.19.0`, curl `8.22.0-r0`
+  and jq `1.8.2-r0` ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+  The Portainer agent itself is unchanged at `2.45.0`.
+- The fourth version component is the add-on revision on the same agent release —
+  `2.45.0.1` still compares newer than `2.45.0`, so Home Assistant offers the update.
+
 ## 2.45.0
 
 - Portainer agent `2.44.0` → `2.45.0`, matching the Portainer server on nkhome.
