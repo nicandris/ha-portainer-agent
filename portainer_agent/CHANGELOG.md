@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.45.1
+
+- Portainer agent `2.45.0` → `2.45.1` (patch: SSRF hardening for Helm/Git requests,
+  [release notes](https://github.com/portainer/portainer/releases/tag/2.45.1)).
+- Home Assistant base image `21.0.4` → `21.0.5`: xz `5.8.4-r0`
+  ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+
 ## 2.45.0.1
 
 - Home Assistant base image `21.0.1` → `21.0.4`: bashio `0.19.0`, curl `8.22.0-r0`
