@@ -5,7 +5,7 @@ Portainer instance can manage the host's Docker containers, images, volumes and 
 
 ## What it is
 
-A thin add-on wrapper: the agent binary is copied from the official `portainer/agent:2.44.0`
+A thin add-on wrapper: the agent binary is copied from the official `portainer/agent:2.45.1`
 image onto the current Home Assistant base image, and started by s6-overlay. Nothing is built
 from source and no third-party image is pulled at runtime.
 
