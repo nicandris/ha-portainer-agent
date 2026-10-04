@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.45.1.1
+
+- Home Assistant base image `21.0.5` → `21.0.7`: Alpine `3.24.2`, tzdata `2026d-r0`,
+  OpenSSL `3.5.9-r0` ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+  The Portainer agent itself is unchanged at `2.45.1`.
+
 ## 2.45.1
 
 - Portainer agent `2.45.0` → `2.45.1` (patch: SSRF hardening for Helm/Git requests,
