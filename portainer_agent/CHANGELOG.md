@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.45.2
+
+- Portainer agent `2.45.1` → `2.45.2` (security: in-cluster Kubernetes API connections now verify
+  TLS during stack deploy and removal, on the agent too;
+  [release notes](https://github.com/portainer/portainer/releases/tag/2.45.2)).
+- Home Assistant base image `21.0.7` → `21.0.8`: tzdata `2026e-r0`
+  ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+
 ## 2.45.1.1
 
 - Home Assistant base image `21.0.5` → `21.0.7`: Alpine `3.24.2`, tzdata `2026d-r0`,
