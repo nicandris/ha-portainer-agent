@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.45.3
+
+- Portainer agent `2.45.2` → `2.45.3` (security: Go 1.26.10 with two Critical CVE fixes, golang.org/x/net
+  0.60.0; eMudhra emSign roots removed from the CA bundle, so registries or Git hosts on emSign
+  certificates stop working; [release notes](https://github.com/portainer/portainer/releases/tag/2.45.3)).
+- Home Assistant base image `21.0.8` → `21.0.9`: Alpine `3.24.3`, musl `1.2.6-r3`
+  ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+
 ## 2.45.2
 
 - Portainer agent `2.45.1` → `2.45.2` (security: in-cluster Kubernetes API connections now verify
