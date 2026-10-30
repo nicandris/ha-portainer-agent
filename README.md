@@ -4,7 +4,7 @@ Private Home Assistant add-on repository.
 
 | Add-on | Version | Description |
 |---|---|---|
-| [Portainer Agent](portainer_agent) | 2.45.3 | Exposes this host's Docker to a remote Portainer instance. |
+| [Portainer Agent](portainer_agent) | 2.45.3.1 | Exposes this host's Docker to a remote Portainer instance. |
 
 ## Install
 

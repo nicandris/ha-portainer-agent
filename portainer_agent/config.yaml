@@ -1,6 +1,6 @@
 ---
 name: Portainer Agent
-version: "2.45.3"
+version: "2.45.3.1"
 slug: portainer_agent
 description: Exposes this host's Docker to a remote Portainer instance
 url: https://github.com/nicandris/ha-portainer-agent

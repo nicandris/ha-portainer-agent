@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.45.3.1
+
+- Home Assistant base image `21.0.9` → `21.0.10`: curl `8.23.0-r0`
+  ([app-base releases](https://github.com/hassio-addons/app-base/releases)).
+
 ## 2.45.3
 
 - Portainer agent `2.45.2` → `2.45.3` (security: Go 1.26.10 with two Critical CVE fixes, golang.org/x/net
