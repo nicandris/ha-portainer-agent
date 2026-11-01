@@ -8,6 +8,10 @@ The agent binary is copied from the `portainer/agent` image at the tag pinned in
 `Dockerfile`, and the add-on version tracks it. Nothing is built from source and no third-party
 image is pulled at runtime.
 
+**Set `AGENT_SECRET` before you rely on this add-on.** Without it, the agent trusts the first
+Portainer server that reaches port 9001, and that server gets full control of this host. See
+[AGENT_SECRET](#agent_secret) below.
+
 ## Connecting Portainer
 
 In Portainer: **Environments → Add environment → Docker Standalone → Agent**, with environment
