@@ -5,8 +5,8 @@ Portainer instance can manage the host's Docker containers, images, volumes and 
 
 ## What it is
 
-A thin add-on wrapper: the agent binary is copied from the official `portainer/agent:2.45.3`
-image onto the current Home Assistant base image, and started by s6-overlay. Nothing is built
+A thin add-on wrapper: the agent binary is copied from the official `portainer/agent` image
+(the tag pinned in the `Dockerfile`, which the add-on version tracks) onto the current Home Assistant base image, and started by s6-overlay. Nothing is built
 from source and no third-party image is pulled at runtime.
 
 ## Configuration
@@ -27,9 +27,17 @@ env_vars:
 Edge agent setups work the same way — set `EDGE`, `EDGE_ID` and `EDGE_KEY` as `env_vars`.
 See the [agent environment variables](https://docs.portainer.io/admin/environments/add/docker/agent).
 
-## Updating the agent
+## Security
 
-Bump the tag in `Dockerfile` and the matching `version` in `config.yaml`, then rebuild the add-on.
+Anyone who can reach port 9001 can control the host's Docker — on Home Assistant OS that is
+the whole system. Never expose the port to the internet, and set `AGENT_SECRET` (the same value
+as `AGENT_SECRET` on the Portainer server) so the agent only accepts that Portainer instance.
+
+## Updating
+
+New agent releases ship as add-on updates through the Add-on Store. Maintainers: bump the tag in
+`Dockerfile` **and** `version` in `config.yaml` — Dependabot only bumps the tag, and Home
+Assistant offers an update only when `version` changes.
 
 ## Notes
 
