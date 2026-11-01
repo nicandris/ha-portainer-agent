@@ -8,6 +8,12 @@ Run the official [Portainer agent](https://docs.portainer.io/admin/environments/
 on your Home Assistant OS / Supervised host, so the Portainer server you already run elsewhere can
 manage the host's Docker containers, images, volumes and networks.
 
+> [!IMPORTANT]
+> **Set `AGENT_SECRET`.** Without it, the agent trusts the first Portainer server that reaches
+> port 9001 — and that server gets full control of your Home Assistant host. Put the same value on
+> the Portainer server and in this add-on's `env_vars`; only the value goes in the add-on field,
+> not `AGENT_SECRET=…`. Steps: [add-on docs](portainer_agent/README.md#agent_secret).
+
 - **Official binary, nothing else.** The agent is copied from the `portainer/agent` image at the
   tag pinned in [`Dockerfile`](portainer_agent/Dockerfile), onto the
   [Home Assistant base image](https://github.com/hassio-addons/app-base). No third-party image is
