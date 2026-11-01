@@ -1,45 +1,75 @@
 # Portainer Agent
 
-Runs the [Portainer agent](https://docs.portainer.io) on this Home Assistant host, so a remote
-Portainer instance can manage the host's Docker containers, images, volumes and networks.
+Runs the official [Portainer agent](https://docs.portainer.io/admin/environments/add/docker/agent)
+on this Home Assistant host, so a Portainer server elsewhere can manage the host's Docker
+containers, images, volumes and networks.
 
-## What it is
+The agent binary is copied from the `portainer/agent` image at the tag pinned in the
+`Dockerfile`, and the add-on version tracks it. Nothing is built from source and no third-party
+image is pulled at runtime.
 
-A thin add-on wrapper: the agent binary is copied from the official `portainer/agent` image
-(the tag pinned in the `Dockerfile`, which the add-on version tracks) onto the current Home Assistant base image, and started by s6-overlay. Nothing is built
-from source and no third-party image is pulled at runtime.
+## Connecting Portainer
+
+In Portainer: **Environments → Add environment → Docker Standalone → Agent**, with environment
+address `<home-assistant-host>:9001`. That works with no configuration, but set `AGENT_SECRET`
+(below) before you rely on it.
 
 ## Configuration
 
-Connect Portainer to `<home-assistant-host>:9001` as an **Agent** environment. No configuration
-is required for that.
-
-`env_vars` passes environment variables straight to the agent, for anything else it supports:
+`env_vars` passes environment variables straight to the agent, so any
+[agent variable](https://docs.portainer.io/admin/environments/add/docker/agent) can be set:
 
 ```yaml
 env_vars:
   - name: AGENT_SECRET
-    value: some-shared-secret
+    value: 3f9c…d41a
   - name: LOG_LEVEL
     value: DEBUG
 ```
 
-Edge agent setups work the same way — set `EDGE`, `EDGE_ID` and `EDGE_KEY` as `env_vars`.
-See the [agent environment variables](https://docs.portainer.io/admin/environments/add/docker/agent).
+`name` must be letters, digits and underscores. Restart the add-on after changing it.
 
-## Security
+### AGENT_SECRET
 
-Anyone who can reach port 9001 can control the host's Docker — on Home Assistant OS that is
-the whole system. Never expose the port to the internet, and set `AGENT_SECRET` (the same value
-as `AGENT_SECRET` on the Portainer server) so the agent only accepts that Portainer instance.
+Without a secret, the agent trusts the first Portainer server that connects to it. With one, it
+accepts only a server holding the same secret. Set it on **both** sides:
 
-## Updating
+1. Generate a value, e.g. `openssl rand -hex 32`.
+2. **Portainer server:** add it as an environment variable on the Portainer container and
+   recreate it. With Compose, put `AGENT_SECRET=<value>` in an env file next to the compose file
+   and reference it with `env_file:`.
+3. **This add-on:** add an `env_vars` entry with `name: AGENT_SECRET` and `value: <value>`, then
+   restart the add-on.
 
-New agent releases ship as add-on updates through the Add-on Store. Maintainers: bump the tag in
-`Dockerfile` **and** `version` in `config.yaml` — Dependabot only bumps the tag, and Home
-Assistant offers an update only when `version` changes.
+The server sends its secret to **every** agent environment it manages, so all your other agents
+need the same value too. Environments that use the local Docker socket are unaffected.
+
+### Edge agent
+
+Set `EDGE=1`, `EDGE_ID` and `EDGE_KEY` as `env_vars`, using the values Portainer shows when you
+add an Edge environment. An Edge agent connects out to the server and needs no inbound port.
+
+## Troubleshooting
+
+**The environment shows `unauthorized`.** The agent and the server have different secrets, or
+only one side has one. The usual mistakes:
+
+- The whole line `AGENT_SECRET=<value>` was pasted into `value`, instead of just `<value>`.
+- Stray quotes or spaces around the value.
+- The add-on or the Portainer container was not restarted after the change.
+
+To check the server's copy without showing it, run
+`docker exec portainer printenv AGENT_SECRET | wc -c`: a 64-character hex secret prints `65`.
+
+**Portainer still shows the old agent version after an update.** The Environments list shows
+the version from the last snapshot. Refresh the environment, and trust the add-on log line
+`App version:` over the Portainer UI.
+
+**No update offered after a new release.** Open **Add-on Store → ⋮ → Check for updates** to make
+the Supervisor fetch the repository again.
 
 ## Notes
 
-- `docker_api` and `full_access` are required — the agent talks to the host Docker socket.
-- Port 9001 is published. The edge agent does not need an inbound port.
+- `docker_api` and `full_access` are required, because the agent talks to the host Docker
+  socket. That is also why protection mode is off.
+- Port 9001 is published. Keep it off the internet.
