@@ -77,3 +77,9 @@ the Supervisor fetch the repository again.
 - `docker_api` and `full_access` are required, because the agent talks to the host Docker
   socket. That is also why protection mode is off.
 - Port 9001 is published. Keep it off the internet.
+
+## Credits
+
+Started from the `portainer_agent` add-on in
+[alexbelgium/hassio-addons](https://github.com/alexbelgium/hassio-addons/tree/master/portainer_agent),
+since rewritten to build from the official image without that repository's build machinery.
