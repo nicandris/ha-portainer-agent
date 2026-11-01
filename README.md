@@ -12,8 +12,8 @@ manage the host's Docker containers, images, volumes and networks.
   tag pinned in [`Dockerfile`](portainer_agent/Dockerfile), onto the
   [Home Assistant base image](https://github.com/hassio-addons/app-base). No third-party image is
   pulled at runtime.
-- **Versioned with the agent.** Add-on `2.45.3` ships agent `2.45.3`; a fourth component
-  (`2.45.3.1`) marks a rebuild on a newer base image.
+- **Versioned with the agent.** Add-on `3.0.0` ships agent `3.0.0`; a fourth component
+  (`3.0.0.1`) marks a rebuild on a newer base image.
 - **Any agent option.** Every
   [agent environment variable](https://docs.portainer.io/admin/environments/add/docker/agent) can
   be set from the add-on configuration, including `AGENT_SECRET` and the Edge agent variables.
@@ -69,3 +69,7 @@ read, so bump it by hand and release it as a fourth-component version.
 Started from the `portainer_agent` add-on in
 [alexbelgium/hassio-addons](https://github.com/alexbelgium/hassio-addons/tree/master/portainer_agent),
 since rewritten to build from the official image without that repository's build machinery.
+
+## License
+
+[MIT](LICENSE)
