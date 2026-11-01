@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0
+
+- Portainer agent `2.45.3` → `3.0.0`, matching Portainer server `3.0.0` STS. Portainer expects the
+  agent and server on the same version: if your server is still on the `2.45` LTS line, stay on
+  add-on `2.45.3.1` until you upgrade it.
+
 ## 2.45.3.1
 
 - Home Assistant base image `21.0.9` → `21.0.10`: curl `8.23.0-r0`
