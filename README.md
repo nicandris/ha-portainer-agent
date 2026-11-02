@@ -4,6 +4,13 @@
 ![Add-on version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnicandris%2Fha-portainer-agent%2Fmain%2Fportainer_agent%2Fconfig.yaml&query=%24.version&label=add-on)
 ![Architectures](https://img.shields.io/badge/arch-amd64%20%7C%20aarch64-blue)
 
+> [!WARNING]
+> **No longer maintained (November 2026).** Portainer 3.0 has no Community Edition: CE is
+> frozen on the 2.x line, with 2.45 LTS as its last release, and 3.x continues only as the
+> closed-source Business Edition. I've moved my own setup off Portainer, so unfortunately I
+> won't be maintaining this add-on any more, and the repository is archived. It keeps working
+> as-is, but it won't get agent updates or fixes.
+
 Run the official [Portainer agent](https://docs.portainer.io/admin/environments/add/docker/agent)
 on your Home Assistant OS / Supervised host, so the Portainer server you already run elsewhere can
 manage the host's Docker containers, images, volumes and networks.
